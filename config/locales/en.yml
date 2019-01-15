@@ -276,4 +276,54 @@ en:
       lose: "lose"
       draw: "draw"
       bet: "BET FOR HOME TEAM"
+  devise:
+    confirmations:
+      new:
+        resend: "Resend confirmation instructions"
+    mailer:
+      instructions:
+        welcome: "Welcome %{email}!"
+        instruction: "You can confirm your account email through the link below:"
+        confirm: "Confirm my account"
+      email_changed:
+        hello: "Hello %{email}"
+        trying_contact: "We're contacting you to notify you that your email is being changed to %{unconfirmed_email}."
+        notify_contact: "We're contacting you to notify you that your email has been changed to %{resource_email}."
+      password_changed:
+        hello: "Hello %{email}"
+        notify_contact: "We're contacting you to notify you that your password has been changed."
+      reset_pass:
+        hello: "Hello %{email}"
+        request_link: "Someone has requested a link to change your password. You can do this through the link below."
+        change_pass: "Change my password"
+        ignore_mail: "If you didn't request this, please ignore this email."
+        click_link: "Your password won't change until you access the link above and create a new one."
+      unlock_instructions:
+        hello: "Hello %{email}"
+        has_been_locked: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        click_link: "Click the link below to unlock your account:"
+        unlock_my_account: "Unlock my account"
+    passwords:
+      edit:
+        title: "Change your password"
+        new_password: "New password"
+        confirm_pass: "Confirm new password"
+        change_pass: "Change my password"
+      new:
+        send_me: "Send me reset password instructions"
+    registrations:
+      edit:
+        waiting: "Currently waiting confirmation for: %{email}"
+        length_small: "%{min_length} characters minimum"
+    sessions:
+      new:
+        log_in: "Log in"
+    shared:
+      links:
+        log_in: "Log in"
+        sign_up: "Sign up"
+        forgot_pass: "Forgot your password?"
+        not_receive: "Didn't receive confirmation instructions?"
+        not_unlock: "Didn't receive confirmation instructions?"
+        sign_in_with: "Sign in with %{provider}"
 

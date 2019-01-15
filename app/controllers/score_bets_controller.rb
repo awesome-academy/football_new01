@@ -80,7 +80,7 @@ class ScoreBetsController < ApplicationController
   end
 
   def check_valid_bet
-    if logged_in?
+    if user_sign_in?
       @match = Match.find_by id: params[:match_id]
       if params[:score_bet][:price].to_f <= current_user.money.to_f
         check_date

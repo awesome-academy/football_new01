@@ -38,11 +38,15 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
 
   create_table "match_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "match_id"
+    t.integer "team_id1"
+    t.integer "team_id2"
     t.integer "score1"
     t.integer "score2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_match_results_on_match_id"
+    t.index ["team_id1"], name: "index_match_results_on_team_id1", unique: true
+    t.index ["team_id2"], name: "index_match_results_on_team_id2", unique: true
   end
 
   create_table "matches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -52,10 +56,10 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.integer "time"
     t.integer "extra_time1"
     t.integer "extra_time2"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "round_id"
-    t.integer "status"
     t.index ["team_id1", "team_id2"], name: "index_matches_on_team_id1_and_team_id2", unique: true
     t.index ["team_id1"], name: "index_matches_on_team_id1"
     t.index ["team_id2"], name: "index_matches_on_team_id2"
@@ -105,9 +109,9 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
   create_table "score_bets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "match_id"
     t.float "price"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
     t.integer "outcome"
     t.bigint "user_id"
     t.index ["match_id"], name: "index_score_bets_on_match_id"
@@ -139,20 +143,21 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password_digest"
-    t.string "remember_digest"
-    t.string "activation_digest"
-    t.boolean "activated"
-    t.datetime "activated_at"
-    t.string "reset_digest"
-    t.datetime "reset_sent_at"
+    t.string "encrypted_password", default: "", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.boolean "admin"
     t.float "money"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activation_digest"], name: "index_users_on_activation_digest", unique: true
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_digest"], name: "index_users_on_reset_digest", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "comments", "news", column: "new_id"
