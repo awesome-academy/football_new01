@@ -108,12 +108,12 @@
                   <div class="search-bar">
                     <div id="imaginary_container">
                       <div class="input-group stylish-input-group">
-                        <%= form_tag(teams_path, method: :get) do %>
-                          <%= text_field_tag :search, params[:search],
-                            placeholder: "Search teams,league by country" %>
-                          <span class="input-group-addon">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </span>
+                        <%= search_form_for @search, class: "form-inline" do |f| %>
+                          <div class="form-group">
+                            <%= f.label :team_cont, t("layouts.top.league_country") %>
+                            <%= f.text_field :team_cont, class: "form-control" %><br>
+                          </div>
+                          <%= f.submit t("layouts.top.search"), class: "btn btn-default" %>
                         <% end %>
                       </div>
                     </div>
