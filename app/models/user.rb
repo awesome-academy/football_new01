@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  USER_PARAMS = %i(:email, :name, :encrypted_password, :admin, :money).freeze
+  USER_PARAMS = %i(email name encrypted_password).freeze
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, :confirmable
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
