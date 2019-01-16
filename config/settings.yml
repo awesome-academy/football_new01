@@ -38,3 +38,6 @@ leagues:
   value: 0
   min: 0
 min_half_time: 15
+transfer:
+  min: 0
+  max: 1

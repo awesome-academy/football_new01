@@ -1,4 +1,5 @@
 class Team < ApplicationRecord
+  acts_as_paranoid
   belongs_to :league, optional: true
   belongs_to :stadium
 

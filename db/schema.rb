@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_05_035534) do
+ActiveRecord::Schema.define(version: 2019_01_16_080026) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_comments_on_deleted_at"
     t.index ["new_id"], name: "index_comments_on_new_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -34,6 +36,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.integer "number_of_round"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_leagues_on_deleted_at"
   end
 
   create_table "match_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -44,6 +48,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.integer "score2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_match_results_on_deleted_at"
     t.index ["match_id"], name: "index_match_results_on_match_id"
     t.index ["team_id1"], name: "index_match_results_on_team_id1", unique: true
     t.index ["team_id2"], name: "index_match_results_on_team_id2", unique: true
@@ -60,6 +66,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "round_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_matches_on_deleted_at"
     t.index ["team_id1", "team_id2"], name: "index_matches_on_team_id1_and_team_id2", unique: true
     t.index ["team_id1"], name: "index_matches_on_team_id1"
     t.index ["team_id2"], name: "index_matches_on_team_id2"
@@ -73,6 +81,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_news_on_deleted_at"
     t.index ["user_id"], name: "index_news_on_user_id"
   end
 
@@ -82,6 +92,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_notifications_on_deleted_at"
     t.index ["score_bet_id"], name: "index_notifications_on_score_bet_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -94,6 +106,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.datetime "updated_at", null: false
     t.integer "point"
     t.integer "hs"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_rankings_on_deleted_at"
     t.index ["league_id"], name: "index_rankings_on_league_id"
     t.index ["team_id"], name: "index_rankings_on_team_id"
   end
@@ -103,6 +117,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.bigint "league_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_rounds_on_deleted_at"
     t.index ["league_id"], name: "index_rounds_on_league_id"
   end
 
@@ -114,6 +130,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.datetime "updated_at", null: false
     t.integer "outcome"
     t.bigint "user_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_score_bets_on_deleted_at"
     t.index ["match_id"], name: "index_score_bets_on_match_id"
     t.index ["user_id"], name: "index_score_bets_on_user_id"
   end
@@ -126,6 +144,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_stadia_on_deleted_at"
   end
 
   create_table "teams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -138,6 +158,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nation"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_teams_on_deleted_at"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -155,7 +177,9 @@ ActiveRecord::Schema.define(version: 2019_01_05_035534) do
     t.float "money"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

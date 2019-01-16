@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :match_results
     resources :leagues
     resources :users
+    resources :news
   end
   get "/admin", to: "admin/users#index"
   resources :users

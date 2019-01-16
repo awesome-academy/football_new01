@@ -1,4 +1,5 @@
 class ScoreBet < ApplicationRecord
+  acts_as_paranoid
   enum status: {pending: 0, completed: 1}
   enum outcome: {win: 0, draw: 1, lose: 2}
   belongs_to :user
