@@ -24,9 +24,12 @@ class User < ApplicationRecord
     length: {minimum: Settings.users.password_length}, allow_nil: true
 
   def reduce_money price
-    ActiveRecord::Base.transaction do
-      new_money = money.to_f - price.to_f
-      update_attributes money: new_money
-    end
+    new_money = money.to_f - price.to_f
+    update_attributes money: new_money
+  end
+
+  def get_money_back price
+    old_money = money.to_f + price.to_f
+    update_attributes money: old_money
   end
 end
