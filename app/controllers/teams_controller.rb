@@ -6,7 +6,8 @@ class TeamsController < ApplicationController
   private
 
   def load_teams
-    @teams = Team.newest.search_by_country(params[:search])
+    return if params[:q].present?
+    @teams = Team.newest
                  .paginate page: params[:page], per_page: Settings.teams.page
   end
 end

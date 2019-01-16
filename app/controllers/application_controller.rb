@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_search
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -12,6 +13,12 @@ class ApplicationController < ActionController::Base
       format.json{head :forbidden}
       format.html{redirect_to root_path, alert: exception.message}
     end
+  end
+
+  def set_search
+    @search = Team.search params[:q]
+    @teams = @search.result.newest
+                    .paginate page: params[:page], per_page: Settings.teams.page
   end
 
   def configure_permitted_parameters

@@ -10,5 +10,5 @@ class Team < ApplicationRecord
 
   delegate :name, to: :stadium, prefix: true
   scope :newest, ->{order created_at: :desc}
-  scope :search_by_country, ->(nation){where "nation like?", "%#{nation}%"}
+  ransack_alias :team, :league_name_or_nation
 end

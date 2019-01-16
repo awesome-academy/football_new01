@@ -14,6 +14,9 @@ en:
   layouts:
     title: "Football News"
     admin: "Admin"
+    top:
+      league_country: "League name or country"
+      search: "Search"
     header:
       home: "Home"
       help: "Help"
