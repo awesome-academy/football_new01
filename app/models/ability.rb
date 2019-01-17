@@ -6,7 +6,8 @@ class Ability
       can :manage, :all
     else
       can :read, :all
-      can :create, :score_bet
+      can [:create, :destroy, :update], ScoreBet, id: user.id
+      can [:create, :destroy, :update], Comment, id: user.id
     end
   end
 end

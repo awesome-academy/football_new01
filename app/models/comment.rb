@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  acts_as_paranoid
   belongs_to :new
   belongs_to :user
 

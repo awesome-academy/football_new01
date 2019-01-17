@@ -1,4 +1,5 @@
 class MatchResult < ApplicationRecord
+  acts_as_paranoid
   belongs_to :match
   scope :newest, ->{order created_at: :desc}
 

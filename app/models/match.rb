@@ -1,6 +1,6 @@
 class Match < ApplicationRecord
   include CheckUp
-
+  acts_as_paranoid
   scope :newest, ->{order match_date: :asc}
 
   enum status: {not_occur: 0, live: 1, finished: 2}
