@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  authorize_resource
   skip_before_action :verify_authenticity_token
   before_action :set_attribute_for_comment, :check_comment, only: :create
   before_action :load_comment, except: :create
@@ -69,7 +70,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = t "comments.controller.error_edit"
     end
-    redirect_to news_path(@new)
+    redirect_to news_path(id: @comment.new_id)
   end
 
   def comment_params

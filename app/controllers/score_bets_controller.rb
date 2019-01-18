@@ -1,5 +1,5 @@
 class ScoreBetsController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   before_action :check_valid_bet, only: :create
   before_action :load_score_bet, only: [:edit, :update, :destroy]
   before_action :check_update, only: :update
@@ -23,7 +23,7 @@ class ScoreBetsController < ApplicationController
 
   private
 
-  def score_params
+  def score_bet_params
     params.require(:score_bet).permit :price, :outcome
   end
 
@@ -37,6 +37,7 @@ class ScoreBetsController < ApplicationController
   def check_deleted
     return if @score_bet.match.finished?
     if @score_bet.destroy
+      @score_bet.user.get_money_back @score_bet.price
       flash.now[:alert] = t "score_bet.controller.delete_success"
     else
       flash.now[:error] = t "score_bet.controller.delete_fail"
@@ -44,7 +45,7 @@ class ScoreBetsController < ApplicationController
   end
 
   def check_update
-    if @score_bet.update_attributes score_params
+    if @score_bet.update_attributes score_bet_params
       flash.now[:alert] = t "score_bet.controller.success_updated"
       redirect_to user_path(current_user)
     else
@@ -81,7 +82,7 @@ class ScoreBetsController < ApplicationController
   end
 
   def check_valid_bet
-    if user_sign_in?
+    if user_signed_in?
       @match = Match.find_by id: params[:match_id]
       if params[:score_bet][:price].to_f <= current_user.money.to_f
         check_date
